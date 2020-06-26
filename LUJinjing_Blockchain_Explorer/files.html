@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://v3.bootcss.com/examples/dashboard/# -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="6000D Final Project">
+    <meta name="author" content="LU Jinjing">
+    <link rel="icon" href="pic/logo.png">
+
+    <title>Blockchain Explorer</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css&js/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="./css&js/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./css&js/dashboard.css" rel="stylesheet">
+    <script src="./css&js/ie-emulation-modes-warning.js"></script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./css&js/jquery.min.js"></script>
+    <script src="./css&js/holder.min.js"></script>
+
+
+    <!-- define some style -->
+    <style type="text/css">
+      table{
+        table-layout:auto;
+      }	
+      td{
+        overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+        /* text-align:center; */
+      }
+      th{
+        /* text-align:center;* 设置水平方向居中 */
+        vertical-align:middle/** 设置垂直方向居中 */
+      }
+      h1{text-align: center;
+        color:rgb(66, 139, 202);
+        vertical-align:middle}
+      h3{text-align: center;
+        color:rgb(66, 139, 202);
+        vertical-align:middle}
+    </style>
+    
+  </head>
+
+  <body data-gr-c-s-loaded="true">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-left">
+            <li><a href="transaction-query.html">Transaction Execution Status</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-left">
+            <li><a href="QueryContract.html">Contract Data</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-left">
+            <li><a href="search_account.html">Account Status</a></li>
+          </ul>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href="index.html">Guidance<span class="sr-only">(current)</span></a></li>
+            <li><a href="Transaction.html">Transactions</a></li>
+            <li><a href="block.html">Blocks</a></li>
+            <li><a href="accounts.html">Accounts</a></li>
+            <li class="active"><a href="files.html">Files</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Upload Files</h1>
+          <div class="table-responsive">
+            <form id="iframe" name="iframe">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="Storage">Storage</label>
+                  <select class="form-control" id="storage">
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                    <option value=6>6</option>
+                    <option value=7>7</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="days">days</label>
+                  <input type='number' class="form-control" id="days" rows="1"></input>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="File">File</label>
+                  <input type="file" class="form-control-file" id="file">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="field">Field</label>
+                  <select class="form-control" id="field_">
+                    <option value="|afs|arfs|">|afs|arfs|</option>
+                    <option value="|afs|">|afs|</option>
+                    <option value="|arfs|">|arfs|</option>
+                  </select>
+                </div>
+              </div>
+              <div style="text-align:right">
+                <button type="button" class="btn btn-primary" onclick="upload()">Upload</button>
+                <!-- <input class="btn btn-primary" type='submit' onkeyup="upload()"> -->
+              </div>
+            </form>
+            <iframe id="iframe" name="iframe" style="display:none;"></iframe>
+          </div>
+          
+          </div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Download Files</h1>
+          <div class="table-responsive">
+            <form>
+              <div class="form-group col-md-6">
+                <label for="fileID">fileID</label>
+                <input type='text' class="form-control" id="fileID" rows="1"></input>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="fileName">fileName</label>
+                <input type='text' class="form-control" id="fileName" rows="1"></input>
+              </div>
+              <div style="text-align:right">
+                <button type="post" class="btn btn-primary" onclick="download()">download</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h3 class="sub-header">The information of the file</h3>
+          <div class="table-responsive">
+            <table class="table table-striped" id="f_table">
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+</body></html>
+<script>
+  function download(){
+    var fid = document.getElementById("fileID").value
+    var fname = document.getElementById("fileName").value
+    var url = "http://159.138.135.42:8100/"+fid+'/'+fname
+    window.open(url)
+    }
+  
+  function upload(){
+    var s= document.getElementById("storage")
+    var st=s.options[s.selectedIndex].value
+    var d= document.getElementById("days").value
+    var f= document.getElementById("file").files[0]
+    // var f= document.getElementById("file")
+    var fie= document.getElementById("field_")
+    var fiel=fie.options[fie.selectedIndex].value
+    // window.alert(fiel)
+    // console.log(st)
+    // window.alert(f)
+    var form = new FormData();
+    form.append("storage",st);
+    form.append('days',d);
+    form.append('file',f)
+    form.append('field',fiel)
+    var ftable=''
+    // console.log(form)
+    $.ajax({
+    url: "http://159.138.135.42:8100/",
+    type: "POST",
+    data: form,
+    processData:false,
+    contentType:false,
+    success: function (data) {
+        console.log(data.data)
+        ftable+='<tr><td>afid</td><td colspan="2">'+data.data.afid+'</td></tr>'
+        ftable+='<tr><td>afid_mini</td><td colspan="2">'+data.data.afid_mini+'</td></tr>'
+        ftable+='<tr><td>afid_lite</td><td colspan="2">'+data.data.afid_lite+'</td></tr>'
+        ftable+='<tr><td>md5</td><td colspan="2">'+data.data.md5+'</td></tr>'
+        ftable+='<tr><td>sha1</td><td colspan="2">'+data.data.sha1+'</td></tr>'
+        if (data.data.fieldStatus[1]){
+        ftable+='<tr><td rowspan="6">fieldStatus</td><td>field</td><td>'+data.data.fieldStatus[0].field+'</td></tr>'
+        ftable+='<tr><td>isExist</td><td>'+data.data.fieldStatus[0].isExist+'</td></tr>'
+        ftable+='<tr><td>expiredTime</td><td>'+data.data.fieldStatus[0].expiredTime+'</td></tr>'
+        ftable+='<tr><td>field</td><td>'+data.data.fieldStatus[1].field+'</td></tr>'
+        ftable+='<tr><td>isExist</td><td>'+data.data.fieldStatus[1].isExist+'</td></tr>'
+        ftable+='<tr><td>expiredTime</td><td>'+data.data.fieldStatus[1].expiredTime+'</td></tr>'
+        }
+        else{
+        ftable+='<tr><td rowspan="6">fieldStatus</td><td>field</td><td>'+data.data.fieldStatus[0].field+'</td></tr>'
+        ftable+='<tr><td>isExist</td><td>'+data.data.fieldStatus[0].isExist+'</td></tr>'
+        ftable+='<tr><td>expiredTime</td><td>'+data.data.fieldStatus[0].expiredTime+'</td></tr>'
+        }
+        $("#f_table").append(ftable);
+      }})
+    }
+  //   error: function(error){
+  //       console.log("Something went wrong", error);
+  //     }
+  //   }
+  // }
+</script>
